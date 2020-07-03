@@ -19,6 +19,12 @@
     <button onclick="showNotifikasiActions()">Notifikasi dengan Actions</button><br>
     <br>
     <button onclick="showNotifikasiTag()">Notifikasi dengan Tag</button><br>
+    <br>
+    <button onclick="showNotifikasiRenotify()">Notifikasi bergetar</button><br>
+    <br>
+    <button onclick="showNotifikasiSilent()">Notifikasi silent</button><br>
+    <br>
+    <button onclick="showNotifikasiGambar()">Notifikasi dengan gambar</button>
 
     <script type="text/javascript">
         // Periksa service worker
@@ -166,6 +172,51 @@
                     registration.showNotification(title1, options1);
                     registration.showNotification(title2, options2);
                     registration.showNotification(title3, options3);
+                });
+            } else {
+                console.error('Fitur notifikasi tidak diijinkan.');
+            }
+        }
+
+        function showNotifikasiRenotify() {
+            const title = 'Notifikasi dengan Renotify';
+            const options = {
+                body: 'Renotify',
+                tag: 'message-group-1',
+                renotify: true,
+            };
+            if (Notification.permission === 'granted') {
+                navigator.serviceWorker.ready.then(function (registration) {
+                    registration.showNotification(title, options);
+                });
+            } else {
+                console.error('Fitur notifikasi tidak diijinkan.');
+            }
+        }
+
+        function showNotifikasiSilent() {
+            const title = 'Notifikasi senyap';
+            const options = {
+                silent: true
+            };
+            if (Notification.permission === 'granted') {
+                navigator.serviceWorker.ready.then(function (registration) {
+                    registration.showNotification(title, options);
+                });
+            } else {
+                console.error('Fitur notifikasi tidak diijinkan.');
+            }
+        }
+
+        function showNotifikasiGambar() {
+            const title = 'Notifikasi dengan Gambar';
+            const options = {
+                'body': 'Ini adalah konten notifikasi dengan gambar latar.',
+                'image': 'maulana.jpg'
+            };
+            if (Notification.permission === 'granted') {
+                navigator.serviceWorker.ready.then(function (registration) {
+                    registration.showNotification(title, options);
                 });
             } else {
                 console.error('Fitur notifikasi tidak diijinkan.');
